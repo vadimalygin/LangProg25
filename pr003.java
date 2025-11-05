@@ -8,7 +8,7 @@ class ExcTest {
 	}
 	static void genException2(){
 		int nums[] = {4, 8, 16, 32, 64, 128, 256};
-		int denominator[] = {2, 4, 4, 4, 4};
+		int denominator[] = {2, 4, 4, 0, 4};
 		for (int i = 0; i<nums.length; i++){
 			
 			System.out.println("Before division");
@@ -33,12 +33,17 @@ class pr003 {
 		}
 		//exc - variable containing a link to Exception class object
 		//ArrayIndex... - is that class for "exc" variable
+		//Throwable is a parent class for all exception classes
+		
 		catch(ArrayIndexOutOfBoundsException exc) {
-			System.out.println("Exception: array index out of bounds");
+			System.out.println("Exception: out of bounds");
 		}
-		catch(ArithmeticException exc){	
-			System.out.println("Exception: invalid arithetic operation");
+		catch(Throwable exc) {
+			System.out.println("Exception: " + exc);
 		}
+		//catch(ArithmeticException exc){	
+		//	System.out.println("Exception: invalid arithetic operation");
+		//}
 		System.out.println("After exception catch");
 		
 	}
