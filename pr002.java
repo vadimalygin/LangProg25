@@ -1,3 +1,9 @@
+//Example of generalized interface
+interface Containment<T> {
+	//Checking containments of a class for a certain element
+	boolean contains(T o); 
+}
+
 class NumFuncs<T extends Number> {
 	T num;
 
@@ -65,13 +71,52 @@ class GenMeth {
 	}
 }
 
+class Summation {
+	private int sum;
+
+//Generalized constructor
+	<T extends Number> Summation (T arg) {
+		sum = 0;
+
+		for (int i = 0; i <= arg.intValue(); i++) {
+			sum += i;
+		}
+	}
+
+	int getSum(){
+		return sum;
+	}
+}
+
 class Test{
 	static void test(Gen1<? extends B> o){}
 	static void test2(Gen1<? super B_A> o){}
 }
 //
 
+//Generalized interface realization
+class ClassGenInt<T> implements Containment<T> {
+	//Class which implements a generalized interface must be also generalized
+	T[] arrayRef;
 
+	ClassGenInt(T[] o) {
+		arrayRef = o;
+	}
+
+	//Realization contains() method
+	public boolean contains(T o) {
+		for (T x : arrayRef){
+			if (x.equals(o)){
+				return true;
+			}
+		}
+		return false;
+	}
+}
+//also u can do smthng like thix
+//class ClassGenInt implements Containment<Integer>{...}
+//or
+//class ClassGenInt<T extends Number> implements Containment<T>{...}
 
 class pr002 {
 	public static void main(String args[]) {
@@ -190,5 +235,53 @@ class pr002 {
 			System.out.println("Array nums5 is identical to nums6");
 		else
 			System.out.println("Array nums5 is not identical to nums6");
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+		//Using "Summation" class with generalized constructor
+		//
+		Summation sob = new Summation(4.2);
+		System.out.println("\nInteger sum of numbers from 0 to 4.2 is: " + sob.getSum());
+
+
+		Summation sob2 = new Summation(4);
+		System.out.println("Integer sum of numbers from 0 to 4 is: " + sob2.getSum());
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+		//Generalized interface
+		Integer x[] = {1, 2, 3};
+		Double y[] = {1.0, 2.0 ,3.0};
+
+		ClassGenInt<Integer> cgiob = new ClassGenInt<Integer>(x);
+
+		if(cgiob.contains(2)){
+			System.out.println("\n2 is in cgiob");
+		}
+		else {
+			System.out.println("\n2 is not in cgiob");
+		}
+
+		if(cgiob.contains(4)){
+			System.out.println("\n4 is in cgiob");
+		}
+		else {
+			System.out.println("\n4 is not in cgiob");
+		}
+
+		ClassGenInt<Double> cgiob2 = new ClassGenInt<Double>(y);
+
+		if(cgiob2.contains(2.0)){
+			System.out.println("\n2.0 is in cgiob2");
+		}
+		else {
+			System.out.println("\n2.0 is not in cgiob2");
+		}
+		
+		if(cgiob2.contains(4.0)){
+			System.out.println("\n4.0 is in cgiob2");
+		}
+		else {
+			System.out.println("\n4.0 is not in cgiob2");
+		}
 	}
 }
