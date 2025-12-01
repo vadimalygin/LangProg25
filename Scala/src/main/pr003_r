@@ -1,0 +1,14 @@
+scala> :load src/main/Pr003.scala
+// defined object TCalc
+
+scala> val four_people = List("Alice","Bob","Charlie","David")
+val four_people: List[String] = List(Alice, Bob, Charlie, David)
+
+scala> TCalc.getTPercentage(four_people)
+val res0: Int = 10
+
+scala> val six_people: List[String] = List("Alice","Bob","Charlie","David", "Eugene", "Franklin")
+val six_people: List[String] = List(Alice, Bob, Charlie, David, Eugene, Franklin)
+
+scala> TCalc.getTPercentage(six_people)
+val res1: Int = 20
