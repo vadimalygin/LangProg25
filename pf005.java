@@ -4,8 +4,9 @@ import java.util.ArrayList;
 class Kurs {
 	public static List<String> replan(List<String> plan, String newChapter, String beforeChapter) {
 		int newChapterIndex = plan.indexOf(beforeChapter);
-		plan.add(newChapterIndex, newChapter);
-		return plan;
+		List<String> replanned = new ArrayList<>(plan); //This creates a copy of original list
+		replanned.add(newChapterIndex, newChapter);	//Now you change a copy, which does not interfere with the original
+		return replanned;
 	}
 	public static void showPlan(List<String> plan){
 		for(int i = 0; i < plan.size(); i++){
@@ -33,8 +34,8 @@ class pf005 {
 	
 		System.out.println("\nplanA containments: ");
 		Kurs.showPlan(planA);
-		//Works not as intended!
-		//Changes to planB happen to plan A, because method replan() is changing original planA data via its pointer(link)
+		//Now this works as intended!
+		//Changes to planB happen not to plan A, because method replan() is changing a copy of planA data
 		//
 
 		
