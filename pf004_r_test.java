@@ -39,8 +39,6 @@ class TCalc {
 		return 0;
     	}
 }
-
-
 class pf004_r {
 	static public void main(String args[]){
 		TCalc list1 = new TCalc();
@@ -54,19 +52,17 @@ class pf004_r {
 		System.out.println("Tip size for l2: " + list1.getTPercentage(l2));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+List<String> l3 = new ArrayList<>();
+TCalc list2 = new TCalc();
+list2.getTPercentage(l3) == 0;
+l3.add("alice")
+l3.add("bob")
+l3.add("charlie")
+list2.getTPercentage(l3) == 0;
+list2.getTPercentage(l3) == 10;
+l3.add("david")
+l3.add("eugene")
+l3.add("franklin")
+list2.getTPercentage(l3) == 0;
+list2.getTPercentage(l3) == 10;
+list2.getTPercentage(l3) == 20;
