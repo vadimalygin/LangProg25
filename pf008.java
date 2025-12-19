@@ -1,8 +1,3 @@
-interface SomeTest<T> {
-    boolean test(T n, T m);
-}
-isFractor.test(10,2);
-isFractor.test(10,3);
 SomeTest<Double> isFractorD = (n,m) -> (n%m)==0;
 isFractorD.test(10.0,3.0);
 isFractorD.test(10.0,2.0);
@@ -127,21 +122,54 @@ class MyIntNum {
 }
 MyIntNum myNum = new MyIntNum(12);
 MyIntNum myNum2 = new MyIntNum(16);
-result = ip.test(3);
 IntPredicate ip = myNum2::isFactor;
 result = ip.test(3);
-
-//Link to a generalized method
-//
 interface SomeTest<T> {
 	boolean test(T n, T m);
 }
-
-class MyClass {
-	static <T> boolean myGenMeth(T x, T y){
-		boolean result = false;
-		//...
-		return result;
-	} 
-}
 SomeTest<Integer> mRef = MyClass::<Integer>myGenMeth;
+interface MyFunc {
+    MyClass func(String s);
+}
+class MyClass {
+    private String str;
+    MyClass(String s){str = s;}
+    MyClass(){str = "";}
+    String getStr(){return str;}
+}
+MyFunc myClassConstructor = MyClass::new;
+MyClass mc = myClassConstructor.func("String");
+mc.getStr()
+interface MyFunc2 {
+    MyClass func();
+}
+MyFunc2 myClassConstructor2 = MyClass::new;
+MyClass mc2 = myClassConstructor2.func();
+mc2.getStr()
+interface ArrayCreator {MyClass[] func(int n);}
+ArrayCreator mcA = MyClass[]::new;
+MyClass[] mcarr = mcA.func(3);
+UnaryOperator<Integer> succesor = (n) -> n+1;
+succesor.apply(3);
+UnaryOperator<String> uOstr = (s) -> s+" "+s;
+uOstr.apply("string");
+BinaryOperator<Integer> intDiv = (n, m) -> n/m;
+intDiv.apply(15, 3)
+intDiv.apply(4, 3)
+BinaryOperator<Double> Div = (n, m) -> n/m;
+Div.apply(4.0, 3.0)
+BinaryOperator<String> concat = (s1, s2) -> s1+s2;
+concat.apply("str1","str2");
+Consumer<Integer> cons = (n) -> {n = 3*n;};
+Integer a = 5;
+cons.accept(a);
+a
+static Double test(int a, int b){return (double)a/b;}
+Supplier<Double> suppl = () -> test(10, 3);
+suppl.get()
+Function<String, Integer> func = (s) -> s.length();
+func.apply("string");
+func.apply("");
+Predicate<Integer> pred = (n) -> n < 5;
+pred.test(10);
+pred.test(1);
